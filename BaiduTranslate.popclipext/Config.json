@@ -1,0 +1,45 @@
+{
+  "name": "百度翻译",
+  "icon": "translate.svg",
+  "identifier": "iibob.popclip.extension.BaiduTranslate",
+  "description": "使用百度翻译所选文本，并替换原始文本。",
+  "popclipVersion": 4069,
+  "module": "translate.js",
+  "entitlements": ["network"],
+  "options": [
+    {
+      "identifier": "appid",
+      "label": "APP ID",
+      "type": "string"
+    },
+    {
+      "identifier:": "key",
+      "label": "密钥",
+      "type": "string",
+      "description":"获取 APP ID 和密钥请前往\nhttps://api.fanyi.baidu.com\n"
+    },
+    {
+      "identifier": "translate_target_language",
+      "label": "译文语言",
+      "type": "multiple",
+      "inset": true,
+      "values": ["auto", "zh", "cht", "en", "jp", "kor", "fra", "spa", "th", "ara", "ru", "pt", "de", "it", "el", "nl", "pl", "bul", "est", "dan", "fin", "cs", "rom", "slo", "swe", "hu", "vie"],
+      "valueLabels": ["自动检测", "中文", "繁体中文", "英语", "日语", "韩语", "法语", "西班牙语", "泰语", "阿拉伯语", "俄语", "葡萄牙语", "德语", "意大利语", "希腊语", "荷兰语", "波兰语", "保加利亚语", "爱沙尼亚语", "丹麦语", "芬兰语", "捷克语", "罗马尼亚语", "斯洛文尼亚语", "瑞典语", "匈牙利语", "越南语"]
+    },
+    {
+      "identifier": "display_method",
+      "label": "译文显示方式",
+      "type": "multiple",
+      "values": ["1", "2", "3"],
+      "valueLabels": ["气泡展示译文", "译文替换原文", "全都要 (两个图标)"]
+    },
+    {
+      "identifier": "replacement_method",
+      "label": "替换原文方式",
+      "type": "multiple",
+      "values": ["1", "2", "3"],
+      "valueLabels": ["默认", "蛇形", "驼峰"],
+      "description":"译文替换原文时生效。\n蛇形或驼峰替换仅支持英文。\n\nBug反馈：iibob@qq.com"
+    }
+  ]
+}
