@@ -1,8 +1,9 @@
 # 百度翻译 (PopClipExtension)
 
 ![pop3](https://github.com/iibob/PopClipExtension/assets/10295975/44efa236-896d-4160-9751-19fa8beaae92)
-![pop2](https://github.com/iibob/PopClipExtension/assets/10295975/ad354f87-5820-4c15-8cc7-e8871bb8bc8b)
-![pop1](https://github.com/iibob/PopClipExtension/assets/10295975/fdffe369-2570-4d1b-b47f-f7d98f57620c)
+![pop2](https://github.com/iibob/PopClipExtension/assets/10295975/3bd54f6e-1857-4db1-9820-8a2f40bb4776)
+![pop1](https://github.com/iibob/PopClipExtension/assets/10295975/1c1cc389-c287-4297-82e7-4e5496abdec7)
+
 <br/>
 <br/>
 
