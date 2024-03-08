@@ -38,11 +38,29 @@ const translate_and_replace = async (input, options) => {
             const translatedText = result.result.data.trans_result[0].dst;
             if (result.result.data.to === "en") {
                 if (options.replacement_method === "1") {
-                    popclip.pasteText(translatedText);
+                    if (popclip.modifiers.command) {
+                        popclip.pasteText(toSnakeCase(translatedText));
+                    } else if (popclip.modifiers.option) {
+                        popclip.pasteText(toCamelCase(translatedText));
+                    } else {
+                        popclip.pasteText(translatedText);
+                    }
                 } else if (options.replacement_method === "2") {
-                    popclip.pasteText(toSnakeCase(translatedText));
+                    if (popclip.modifiers.command) {
+                        popclip.pasteText(translatedText);
+                    } else if (popclip.modifiers.option) {
+                        popclip.pasteText(toCamelCase(translatedText));
+                    } else {
+                        popclip.pasteText(toSnakeCase(translatedText));
+                    }
                 } else if (options.replacement_method === "3") {
-                    popclip.pasteText(toCamelCase(translatedText));
+                    if (popclip.modifiers.command) {
+                        popclip.pasteText(translatedText);
+                    } else if (popclip.modifiers.option) {
+                        popclip.pasteText(toSnakeCase(translatedText));
+                    } else {
+                        popclip.pasteText(toCamelCase(translatedText));
+                    }
                 }
             } else {
                 popclip.pasteText(translatedText);
@@ -92,7 +110,7 @@ const translate = async (appid, key, str1, to) => {
 };
 
 
-const apps = ["com.apple.Safari"]
+const apps = ["com.apple.dt.Xcode", "com.microsoft.VSCode"];
 
 // 导出操作
 exports.actions = [{
