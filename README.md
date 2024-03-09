@@ -31,9 +31,10 @@
 ## 安装：
 1. 确保已安装 [PopClip](https://www.popclip.app/)
 2. 下载 `BaiduTranslate.popclipext` 后，鼠标双击安装
-3. 点击 `安装“百度翻译”`
+3. 在弹出的窗口中选择 `安装“百度翻译”`
 4. 前往 [百度翻译开放平台](https://api.fanyi.baidu.com/doc/21) 获取 APP ID 和密钥
 5. 在插件选项中填入 APP ID 和密钥，以及配置译文显示方式和替换方式
+6. 开始愉快的使用吧
 <br/>
 
 ## 更新日志
