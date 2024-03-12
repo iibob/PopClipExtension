@@ -1,0 +1,46 @@
+{
+  "name": "Coding Cases",
+  "icon": "CodingCases.svg",
+  "identifier": "iibob.popclip.extension.CodingCases",
+  "popclipVersion": 3895,
+  "module": "mainAction.js",
+  "entitlements": ["dynamic"],
+  "options": [
+    {
+      "identifier": "camelCase",
+      "label": "驼峰",
+      "type": "boolean",
+      "icon": "camelCase.svg"
+    },
+    {
+      "identifier": "UpperCamelCase",
+      "label": "大驼峰",
+      "type": "boolean",
+      "icon": "UpperCamelCase.svg"
+    },
+    {
+      "identifier": "snake_case",
+      "label": "蛇形",
+      "type": "boolean",
+      "icon": "snake_case.svg"
+    },
+    {
+      "identifier": "CONSTANT_CASE",
+      "label": "蛇形大写",
+      "type": "boolean",
+      "icon": "CONSTANT_CASE.svg"
+    },
+    {
+      "identifier": "kebab-case",
+      "label": "串式",
+      "type": "boolean",
+      "icon": "kebab-case.svg"
+    },
+    {
+      "identifier:": "bundle_identifier",
+      "label": "生效的应用",
+      "type": "string",
+      "description":"· 填写应用的唯一标识符。\n· 多个使用空格隔开。\n· 留空则全局生效。"
+    }
+  ]
+}
