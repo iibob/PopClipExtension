@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.actions = void 0;
 
+
 // const apps = ["com.apple.dt.Xcode", "com.microsoft.VSCode", "com.apple.TextEdit", "com.apple.Notes", "com.sublimetext.4"];
 
 const keyMap = {
