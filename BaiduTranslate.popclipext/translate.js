@@ -6,15 +6,19 @@ const axios_1 = require("axios");
 
 // 气泡展示译文
 const display_translate = async (input, options) => {
-    const appid = options.appid;
-    const key = options.key;
-    const str1 = convertString(input.text);
-    const to = options.translate_target_language;
-
+    const values = formatString(input, options);
     try {
-        const result = await translate(appid, key, str1, to);
+        const result = await translate(values.appid, values.key, values.str, values.to);
         if (result.status === "success") {
-            popclip.showText(result.result.data.trans_result[0].dst);
+            let translatedText = "";
+            for (var i = 0; i < result.result.data.trans_result.length; i++) {
+                const dstValue = result.result.data.trans_result[i].dst;
+                translatedText += dstValue;
+                if (i < result.result.data.trans_result.length - 1) {
+                    translatedText += "\n";
+                }
+            }
+            popclip.showText(translatedText);
         } else if (result.status === "fail") {
             popclip.showText(result.errorCode);
         } else {
@@ -25,23 +29,28 @@ const display_translate = async (input, options) => {
     }
 };
 
+
 // 译文替换原文
 const translate_and_replace = async (input, options) => {
-    const appid = options.appid;
-    const key = options.key;
-    const str1 = convertString(input.text);
-    const to = options.translate_target_language;
-
+    const values = formatString(input, options);
     try {
-        const result = await translate(appid, key, str1, to);
+        const result = await translate(values.appid, values.key, values.str, values.to);
         if (result.status === "success") {
-            const translatedText = result.result.data.trans_result[0].dst;
-            if (result.result.data.to === "en") {
+            let translatedText = "";
+            for (var i = 0; i < result.result.data.trans_result.length; i++) {
+                const dstValue = result.result.data.trans_result[i].dst;
+                translatedText += dstValue;
+                if (i < result.result.data.trans_result.length - 1) {
+                    translatedText += "\n";
+                }
+            }
+            if (result.result.data.to === "en" && result.result.data.trans_result.length === 1) {
+                const str = translatedText.replace(/[^a-zA-Z0-9]/g, ' ').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim().toLowerCase();
                 if (options.replacement_method === "1") {
                     if (popclip.modifiers.command) {
-                        popclip.pasteText(toSnakeCase(translatedText));
+                        convertCase('snake_case', str);
                     } else if (popclip.modifiers.option) {
-                        popclip.pasteText(toCamelCase(translatedText));
+                        convertCase("camelCase", str);
                     } else {
                         popclip.pasteText(translatedText);
                     }
@@ -49,17 +58,17 @@ const translate_and_replace = async (input, options) => {
                     if (popclip.modifiers.command) {
                         popclip.pasteText(translatedText);
                     } else if (popclip.modifiers.option) {
-                        popclip.pasteText(toCamelCase(translatedText));
+                        convertCase("camelCase", str);
                     } else {
-                        popclip.pasteText(toSnakeCase(translatedText));
+                        convertCase("snake_case", str);
                     }
                 } else if (options.replacement_method === "3") {
                     if (popclip.modifiers.command) {
                         popclip.pasteText(translatedText);
                     } else if (popclip.modifiers.option) {
-                        popclip.pasteText(toSnakeCase(translatedText));
+                        convertCase("snake_case", str);
                     } else {
-                        popclip.pasteText(toCamelCase(translatedText));
+                        convertCase("camelCase", str);
                     }
                 }
             } else {
@@ -74,6 +83,91 @@ const translate_and_replace = async (input, options) => {
         popclip.showFailure();
     }
 };
+
+
+function formatString(input, options) {
+    const appid = options.appid;
+    const key = options.key;
+    let str = input.text.trim();
+    const to = options.translate_target_language;
+
+    if (isEnglishString(str)) {
+        str = spaceSeparated(getNamingStyle(str), str);
+    }
+    return {
+        appid: appid,
+        key: key,
+        str: str,
+        to: to
+    };
+}
+
+
+// 仅由英文、数字、符号和空格组成，不包含制表符和换行符
+function isEnglishString(str) {
+    const regex = /^[a-zA-Z0-9!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~ ]+$/;
+    return regex.test(str);
+}
+
+
+// 判断字符串的命名风格
+function getNamingStyle(str) {
+    const str2 = str.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, '');
+    if (/^[a-z][a-zA-Z0-9]*$/.test(str2)) {
+        return 'camelCase';
+    } else if (/^[A-Z][a-zA-Z0-9]*$/.test(str2)) {
+        return 'UpperCamelCase';
+    } else if (/^[a-z]+(_[a-z0-9]+)*$/.test(str2)) {
+        return 'snake_case';
+    } else if (/^[A-Z]+(_[A-Z0-9]+)*$/.test(str2)) {
+        return 'CONSTANT_CASE';
+    } else if (/^[a-z]+(-[a-z0-9]+)*$/.test(str2)) {
+        return 'kebab-case';
+    } else {
+        return 'unknown';
+    }
+}
+
+
+// 将具有命名风格的字符串转换成空格连接的字符串
+function spaceSeparated(namingStyle, str) {
+    if (namingStyle === 'camelCase') {
+        return str.replace(/([A-Z])([a-z])/g, ' $1$2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+    } else if (namingStyle === 'UpperCamelCase') {
+        return str.replace(/([A-Z])([a-z])/g, ' $1$2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+    } else if (namingStyle === 'snake_case') {
+        return str.replace(/_/g, ' ').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+    } else if (namingStyle === 'CONSTANT_CASE') {
+        return str.replace(/_/g, ' ').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+    } else if (namingStyle === 'kebab-case') {
+        return str.replace(/-/g, ' ').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+    } else {
+        return str.replace(/[\\\-._/]/g, ' ').replace(/([A-Z])([a-z])/g, ' $1$2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+    }
+}
+
+
+// 将全小写字母，可能有数字的字符串替换成指定命名风格
+function convertCase(namingStyle, str) {
+    if (namingStyle === 'camelCase') {
+        const camelCaseSentence = str.replace(/\b\w/g, function (word, index) {
+            return index === 0 ? word.toLowerCase() : word.toUpperCase();
+        }).replace(/\s+/g, '');
+        popclip.pasteText(camelCaseSentence);
+    } else if (namingStyle === 'UpperCamelCase') {
+        const upperCamelCaseSentence = str.replace(/\b\w/g, function (word) {
+            return word.toUpperCase();
+        }).replace(/\s+/g, '');
+        popclip.pasteText(upperCamelCaseSentence);
+    } else if (namingStyle === 'snake_case') {
+        popclip.pasteText(str.replace(/\s+/g, '_'));
+    } else if (namingStyle === 'CONSTANT_CASE') {
+        popclip.pasteText(str.replace(/\s+/g, '_').toUpperCase());
+    } else if (namingStyle === 'kebab-case') {
+        popclip.pasteText(str.replace(/\s+/g, '-'));
+    }
+}
+
 
 // 翻译字符串
 const translate = async (appid, key, str1, to) => {
@@ -122,6 +216,7 @@ exports.actions = [{
     title: "翻译并替换",
     requirements: ["option-display_method=2", "paste"],
     code: translate_and_replace,
+    // excludedApps: apps,
     // requiredApps: apps,
     icon: "coding_cases.svg"
 }, {
@@ -133,53 +228,11 @@ exports.actions = [{
     title: "翻译并替换",
     requirements: ["option-display_method=3", "paste"],
     code: translate_and_replace,
+    // excludedApps: apps,
     // requiredApps: apps,
     icon: "coding_cases.svg"
 }];
 
-
-// 若字符串为蛇形或驼峰格式则会去除相应格式，无格式字符串则不受影响。
-function convertString(str) {
-    // 检查字符串是否只由大写字母和小写字母组成，或者由大写字母、小写字母和数字组成
-    const validChars = /^[A-Za-z]+$|^[A-Za-z0-9]+$/;
-
-    // 检查字符串前方大写字母数量是否至少为两个
-    const uppercaseCount = str.match(/^[A-Z]{2,}/)?.[0].length || 0;
-
-    // 检查字符串是否包含至少一个小写字母
-    const hasLowercase = /[a-z]/.test(str);
-
-    if (validChars.test(str) && uppercaseCount >= 2 && hasLowercase) {
-        // 使用正则匹配字符串，并替换：在大写字母后方有小写字母的组合的前方加空格、在一个或多个数字前后加空格、在至少两个连续的大写字母前后加空格、去除字符串首尾的空格、连续两个或更多空格替换为一个空格。
-        // 如：MKCoordinateRegion => MK Coordinate Region，避免无空格导致翻译出错。
-        return str.replace(/([A-Z][a-z])/g, ' $1').replace(/([0-9]+)/g, ' $1 ').replace(/([A-Z]{2,})/g, ' $1 ').trim().replace(/\s{2,}/g, ' ');
-    } else {
-        // 替换蛇形、驼峰、短横线连接为无格式；无格式字符未变更。
-        return str.replace(/[_-]|([A-Z]+)/g, (match, group1) => group1 ? ' ' + group1.toLowerCase() : ' ').replace(/([0-9]+)/g, ' $1 ').trim().replace(/\s{2,}/g, ' ');
-    }
-}
-
-// 去除字符串中的标点符号
-function removePunctuation(str) {
-    return str.replace(/[^\w\s]/g, "");
-}
-
-// 将英文字符串转换为蛇形格式
-function toSnakeCase(str) {
-    const cleanedStr = removePunctuation(str);
-    const singleSpaceStr = cleanedStr.replace(/\s+/g, ' ');
-    return singleSpaceStr.split(" ").join("_").toLowerCase();
-}
-
-// 将英文字符串转换为驼峰格式
-function toCamelCase(str) {
-    const cleanedStr = removePunctuation(str);
-    const words = cleanedStr.split(" ");
-    const camelCase = words.map((word, index) => {
-        return index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }).join("");
-    return camelCase;
-}
 
 // 执行 MD5 哈希算法 (百度翻译官方代码)
 const MD5 = function (string) {
@@ -287,7 +340,6 @@ const MD5 = function (string) {
                 utftext += String.fromCharCode(((c >> 6) & 63) | 128);
                 utftext += String.fromCharCode((c & 63) | 128);
             }
-
         }
 
         return utftext;
