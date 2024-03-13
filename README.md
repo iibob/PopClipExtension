@@ -1,4 +1,4 @@
-[456](百度翻译 (PopClip 插件))  [789](命名风格转换 (PopClip 插件))
+[456](#user-content-百度翻译-popclip-插件)  [789](#命名风格转换-popclip-插件)
 
 # 百度翻译 (PopClip 插件)
 
