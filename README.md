@@ -23,7 +23,7 @@
 - 译文显示方式设置为 `全都要` 时支持显示两个图标，分别对应“展示译文”和“替换原文”的功能。
   - 选中的文本不可编辑时，会自动隐藏“替换原文”的图标。（此规则不适用于 Chrome ）
 - 替换原文方式支持 `默认` `蛇形` `驼峰` 命名风格。
-  - “蛇形”和“驼峰”选项仅支持英文的译文，否则直接替换，无命名风格。
+  - “蛇形”和“驼峰”选项仅支持**原文不包含换行**且**译文为英文**时，否则直接替换，无命名风格。
   - 该选项不影响“气泡展示译文”的显示方式。
 
 |替换原文方式|说明|修饰键|
@@ -31,6 +31,45 @@
 |默认|使用译文替换原文|`Command (⌘)` 临时启用 **蛇形** 替换；<br>`Option (⌥)`&emsp;临时启用 **驼峰** 替换。|
 |蛇形|使用蛇形命名风格的译文替换原文|`Command (⌘)` 临时启用 **默认** 替换；<br>`Option (⌥)`&emsp;临时启用 **驼峰** 替换。|
 |驼峰|使用驼峰命名风格的译文替换原文|`Command (⌘)` 临时启用 **默认** 替换；<br>`Option (⌥)`&emsp;临时启用 **蛇形** 替换。|
+<br>
+
+**设置指定应用程序禁用/使用：**
+1. 鼠标右键点击 `BaiduTranslate.popclipext`，选择 `显示包内容`
+2. 打开 `translate.js`
+3. [获取程序的 BundleIdentifier](#user-content-获取-bundleidentifier) 填入 `apps` 数组中
+4. 取消注释 `excludedApps: apps,`（表示在指定应用程序中禁用插件）或者 `requiredApps: apps,`（表示仅在指定应用程序中启用插件）
+5. 保存代码后安装插件
+
+```JavaScript
+const apps = ["com.apple.dt.Xcode", "com.microsoft.VSCode"];
+
+// 导出操作
+exports.actions = [{
+    title: "翻译",
+    requirements: ["option-display_method=1"],
+    code: display_translate,
+    icon: "translate.svg"
+}, {
+    title: "翻译并替换",
+    requirements: ["option-display_method=2", "paste"],
+    code: translate_and_replace,
+    // excludedApps: apps,
+    // requiredApps: apps,
+    icon: "coding_cases.svg"
+}, {
+    title: "翻译",
+    requirements: ["option-display_method=3"],
+    code: display_translate,
+    icon: "translate.svg"
+}, {
+    title: "翻译并替换",
+    requirements: ["option-display_method=3", "paste"],
+    code: translate_and_replace,
+    // excludedApps: apps,
+    // requiredApps: apps,
+    icon: "coding_cases.svg"
+}];
+```
 <br>
 
 ## 安装：
@@ -42,9 +81,12 @@
 6. 开始愉快的使用吧
 <br>
 
-----
-<details> <summary>更新日志</summary>
-  
+## 更新日志：
+<details><summary>点击打开</summary>
+
+**2024年3月13日**
+- 优化具有命名风格文本的识别和转换逻辑
+
 **2024年3月8日**
 - 初代版本发布
 </details>
@@ -81,6 +123,14 @@
 3. 在弹出的窗口中选择 `安装“Coding Cases”`
 5. 配置插件选项
 6. 开始愉快的使用吧
+<br>
+
+## 更新日志：
+<details><summary>点击打开</summary>
+
+**2024年3月13日**
+- 初代版本发布
+</details>
 <br>
 
 ## 获取 BundleIdentifier：
