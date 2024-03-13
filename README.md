@@ -1,3 +1,5 @@
+[456](百度翻译 (PopClip 插件))  [789](命名风格转换 (PopClip 插件))
+
 # 百度翻译 (PopClip 插件)
 
 ![pop3](https://github.com/iibob/PopClipExtension/assets/10295975/44efa236-896d-4160-9751-19fa8beaae92)
