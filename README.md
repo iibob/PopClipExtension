@@ -47,3 +47,10 @@
 <br>
 
 # 命名风格转换 (PopClip 插件)
+
+|说明|修饰键|
+|---|---|
+|![gif01](https://github.com/iibob/PopClipExtension/assets/10295975/099f1577-3196-4ac2-9643-14576aa3b8af)|![gif02](https://github.com/iibob/PopClipExtension/assets/10295975/a1202b04-0631-4384-a74a-f3d3642cc0c1)|
+
+
+
