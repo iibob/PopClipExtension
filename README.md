@@ -60,12 +60,37 @@
 
 ### 选项：
 ![image](https://github.com/iibob/PopClipExtension/assets/10295975/63bdac58-48af-43b8-a2c2-a126cbaf48f9)
-- 勾选风格名称表示启用，即在 PopClip 上展示对应的图标。
-- 若仅在指定应用程序中使用插件，可在 `失效的应用` 栏填写应用程序的 BundleIdentifier
-  - 获取 BundleIdentifier
+- 勾选风格名称表示启用，即在 PopClip 上展示对应的图标
+- 若仅在指定应用程序中使用插件，可在 `生效的应用` 栏填写应用程序的 BundleIdentifier
+  - [获取 BundleIdentifier]()
   - 填写多个使用空格隔开
   - 此项留空代表对所有应用程序生效
+<br>
 
+## 安装：
+1. 确保已安装 [PopClip](https://www.popclip.app/)
+2. 下载 `CodingCases.popclipext` 后，鼠标双击安装
+3. 在弹出的窗口中选择 `安装“Coding Cases”`
+5. 配置插件选项
+6. 开始愉快的使用吧
+<br>
 
+### 获取 BundleIdentifier：
+方法1：
+1. 打开访达，进入 `应用程序` 文件夹
+2. 找到你想要查找的应用程序，鼠标右键点击应用程序图标，选择 `显示包内容`
+3. 进入 `Contents` 目录，使用 `文本编辑` 打开 `Info.plist` 文件
+4. 搜索 `CFBundleIdentifier`，其下一行即为 BundleIdentifier
+   >例如下一行内容为 `<string>com.google.Chrome</string>`，去掉一对尖括号即为结果。
+<br>
+
+方法2：
+1. 打开 `终端`，输入以下命令（注意 -raw 后面有个空格）
+   ```
+   mdls -name kMDItemCFBundleIdentifier -raw 
+   ```
+3. 在访达的 `应用程序` 文件夹找到你想要查找的应用程序
+4. 将应用程序图标拖入终端，然后按下 enter 键，即可得到 BundleIdentifier
+   >例如终端返回了 `com.google.Chrome%`，去掉百分号即为结果。
 
 
