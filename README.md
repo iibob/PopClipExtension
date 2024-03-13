@@ -37,7 +37,7 @@
 1. 鼠标右键点击 `BaiduTranslate.popclipext`，选择 `显示包内容`
 2. 打开 `translate.js`
 3. [获取程序的 BundleIdentifier](#user-content-获取-bundleidentifier) 填入 `apps` 数组中
-4. 取消注释 `excludedApps: apps,`（表示在指定应用程序中禁用插件）或者 `requiredApps: apps,`（表示仅在指定应用程序中启用插件）
+4. 取消注释 `excludedApps: apps,`（表示在指定应用程序中禁用某一功能）或者 `requiredApps: apps,`（表示仅在指定应用程序中启用某一功能）
 5. 保存代码后安装插件
 
 ```JavaScript
