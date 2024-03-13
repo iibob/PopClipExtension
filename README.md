@@ -1,4 +1,4 @@
-[🚀 百度翻译插件](#百度翻译-popclip-插件) &emsp;[🚀命名风格转换插件](#命名风格转换-popclip-插件)
+本仓库包含两款 PopClip 插件：[🚀 百度翻译](#百度翻译-popclip-插件) &emsp;[🚀 命名风格转换](#命名风格转换-popclip-插件)
 
 <br>
 
@@ -28,9 +28,9 @@
 
 |替换原文方式|说明|修饰键|
 |:---:|---|---|
-|默认|使用译文替换原文|`Command (⌘)` 临时启用 **蛇形** 替换；<br/>`Option (⌥)`&emsp;临时启用 **驼峰** 替换。|
-|蛇形|使用蛇形命名风格的译文替换原文|`Command (⌘)` 临时启用 **默认** 替换；<br/>`Option (⌥)`&emsp;临时启用 **驼峰** 替换。|
-|驼峰|使用驼峰命名风格的译文替换原文|`Command (⌘)` 临时启用 **默认** 替换；<br/>`Option (⌥)`&emsp;临时启用 **蛇形** 替换。|
+|默认|使用译文替换原文|`Command (⌘)` 临时启用 **蛇形** 替换；<br>`Option (⌥)`&emsp;临时启用 **驼峰** 替换。|
+|蛇形|使用蛇形命名风格的译文替换原文|`Command (⌘)` 临时启用 **默认** 替换；<br>`Option (⌥)`&emsp;临时启用 **驼峰** 替换。|
+|驼峰|使用驼峰命名风格的译文替换原文|`Command (⌘)` 临时启用 **默认** 替换；<br>`Option (⌥)`&emsp;临时启用 **蛇形** 替换。|
 <br>
 
 ## 安装：
@@ -44,7 +44,7 @@
 
 ----
 <details> <summary>更新日志</summary>
-
+  
 **2024年3月8日**
 - 初代版本发布
 </details>
@@ -52,9 +52,20 @@
 
 # 命名风格转换 (PopClip 插件)
 
-|说明|修饰键|
+|命名风格转换|文本转换|
 |---|---|
-|![gif01](https://github.com/iibob/PopClipExtension/assets/10295975/099f1577-3196-4ac2-9643-14576aa3b8af)|![gif02](https://github.com/iibob/PopClipExtension/assets/10295975/a1202b04-0631-4384-a74a-f3d3642cc0c1)|
+|![gif01](https://github.com/iibob/PopClipExtension/assets/10295975/099f1577-3196-4ac2-9643-14576aa3b8af)|![gif02](https://github.com/iibob/PopClipExtension/assets/10295975/a1202b04-0631-4384-a74a-f3d3642cc0c1)
+|支持驼峰、大驼峰、蛇形、蛇形大写、串式命名风格相互转换<br><br>自动隐藏原有命名风格的图标|兼容其他类型的文本|
+<br>
+
+### 选项：
+![image](https://github.com/iibob/PopClipExtension/assets/10295975/63bdac58-48af-43b8-a2c2-a126cbaf48f9)
+- 勾选风格名称表示启用，即在 PopClip 上展示对应的图标。
+- 若仅在指定应用程序中使用插件，可在 `失效的应用` 栏填写应用程序的 BundleIdentifier
+  - 获取 BundleIdentifier
+  - 填写多个使用空格隔开
+  - 此项留空代表对所有应用程序生效
+
 
 
 
