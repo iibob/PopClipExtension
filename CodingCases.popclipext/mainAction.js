@@ -131,4 +131,3 @@ function getNamingStyle(str) {
 
 
 exports.actions = actions;
-
