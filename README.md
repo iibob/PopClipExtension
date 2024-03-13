@@ -8,7 +8,7 @@
 
 <br>
 
-### 功能：
+## 功能：
 |气泡展示译文|译文替换原文|
 |---|---|
 |![pop1](https://github.com/iibob/PopClipExtension/assets/10295975/1c1cc389-c287-4297-82e7-4e5496abdec7)|![pop2](https://github.com/iibob/PopClipExtension/assets/10295975/3bd54f6e-1857-4db1-9820-8a2f40bb4776)|
@@ -16,7 +16,7 @@
 |支持识别命名风格：驼峰、大驼峰、蛇形、蛇形大写、串式|支持替换为默认、蛇形、驼峰命名风格|
 <br>
 
-### 选项：
+## 选项：
 ![image](https://github.com/iibob/PopClipExtension/assets/10295975/408280aa-81bf-4195-9236-9fb97178d77d)
 - APP ID 和密钥请前往 [百度翻译开放平台](https://api.fanyi.baidu.com/doc/21) 获取。
 - 译文语言设置为 `自动检测` 时支持自动中英互译，设置为其他语言时不支持自动互译。
@@ -58,11 +58,11 @@
 |支持驼峰、大驼峰、蛇形、蛇形大写、串式命名风格相互转换<br><br>自动隐藏原有命名风格的图标|兼容其他类型的文本|
 <br>
 
-### 选项：
+## 选项：
 ![image](https://github.com/iibob/PopClipExtension/assets/10295975/63bdac58-48af-43b8-a2c2-a126cbaf48f9)
 - 勾选风格名称表示启用，即在 PopClip 上展示对应的图标
 - 若仅在指定应用程序中使用插件，可在 `生效的应用` 栏填写应用程序的 BundleIdentifier
-  - [获取 BundleIdentifier]()
+  - [获取 BundleIdentifier](#user-content-获取-bundleidentifier)
   - 填写多个使用空格隔开
   - 此项留空代表对所有应用程序生效
 <br>
@@ -75,8 +75,8 @@
 6. 开始愉快的使用吧
 <br>
 
-### 获取 BundleIdentifier：
-方法1：
+## 获取 BundleIdentifier：
+**方法1：**
 1. 打开访达，进入 `应用程序` 文件夹
 2. 找到你想要查找的应用程序，鼠标右键点击应用程序图标，选择 `显示包内容`
 3. 进入 `Contents` 目录，使用 `文本编辑` 打开 `Info.plist` 文件
@@ -84,7 +84,7 @@
    >例如下一行内容为 `<string>com.google.Chrome</string>`，去掉一对尖括号即为结果。
 <br>
 
-方法2：
+**方法2：**
 1. 打开 `终端`，输入以下命令（注意 -raw 后面有个空格）
    ```
    mdls -name kMDItemCFBundleIdentifier -raw 
