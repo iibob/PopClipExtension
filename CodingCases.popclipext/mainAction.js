@@ -87,7 +87,7 @@ function spaceSeparated(namingStyle, str) {
     } else if (namingStyle === 'kebab-case') {
         return str.replace(/-/g, ' ').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
     } else {
-        return str.replace(/[\\\-._/]/g, ' ').replace(/([A-Z])([a-z])/g, ' $1$2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+        return str.replace(/[^a-zA-Z0-9]/g, ' ').replace(/([A-Z])([a-z])/g, ' $1$2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
     }
 }
 
@@ -106,8 +106,8 @@ function isSpecialString(str) {
     if (str2 === '') {
         return true
     }
-    // 依次判断只有大写字母、只有小写字母、只有一个大写字母和一个或多个小写字母、只有数字(含小数负数)、单个大小写字母或数字或标点符号 组成
-    return /^[A-Z]+$/.test(str2) || /^[a-z]+$/.test(str2) || /^[A-Z][a-z]+$/.test(str2) || /^-?\d*\.?\d+$/.test(str2) || /^[a-zA-Z0-9-._/]$/.test(str2);
+    // 依次判断只有大写字母、只有小写字母、只有一个大写字母和一个或多个小写字母、只有数字(含小数负数)、不包含字母 组成
+    return /^[A-Z]+$/.test(str2) || /^[a-z]+$/.test(str2) || /^[A-Z][a-z]+$/.test(str2) || /^-?\d*\.?\d+$/.test(str2) || /^[^a-zA-Z]*$/.test(str);
 }
 
 
