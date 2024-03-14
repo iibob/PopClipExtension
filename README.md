@@ -135,7 +135,7 @@ exports.actions = [{
 
 ## 获取 BundleIdentifier：
 **方法1：**
-1. 打开访达，进入 `应用程序` 文件夹
+1. 打开访达，进入 `应用程序` 目录
 2. 找到你想要查找的应用程序，鼠标右键点击应用程序图标，选择 `显示包内容`
 3. 进入 `Contents` 目录，使用 `文本编辑` 打开 `Info.plist` 文件
 4. 搜索 `CFBundleIdentifier`，其下一行即为 BundleIdentifier
@@ -147,7 +147,7 @@ exports.actions = [{
    ```
    mdls -name kMDItemCFBundleIdentifier -raw 
    ```
-3. 在访达的 `应用程序` 文件夹找到你想要查找的应用程序
+3. 在访达的 `应用程序` 目录找到你想要查找的应用程序
 4. 将应用程序图标拖入终端，然后按下 enter 键，即可得到 BundleIdentifier
    >例如终端返回了 `com.google.Chrome%`，去掉百分号即为结果。
 
