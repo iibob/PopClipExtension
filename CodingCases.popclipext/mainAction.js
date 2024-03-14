@@ -107,7 +107,7 @@ function isSpecialString(str) {
         return true
     }
     // 依次判断只有大写字母、只有小写字母、只有一个大写字母和一个或多个小写字母、只有数字(含小数负数)、不包含字母 组成
-    return /^[A-Z]+$/.test(str2) || /^[a-z]+$/.test(str2) || /^[A-Z][a-z]+$/.test(str2) || /^-?\d*\.?\d+$/.test(str2) || /^[^a-zA-Z]*$/.test(str);
+    return /^[A-Z]+$/.test(str2) || /^[a-z]+$/.test(str2) || /^[A-Z][a-z]+$/.test(str2) || /^-?\d*\.?\d+$/.test(str2) || /^[^a-zA-Z]*$/.test(str2);
 }
 
 
