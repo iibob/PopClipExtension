@@ -129,7 +129,8 @@ function getNamingStyle(str) {
 }
 
 
-// 将具有命名风格的字符串转换成空格连接的字符串
+
+// 将具有命名风格的字符串转换成空格连接的字符串，无命名风格字符串直接返回原字符或者按规则拆分，以便被正确翻译。
 function spaceSeparated(namingStyle, str) {
     if (namingStyle === 'camelCase') {
         return str.replace(/([A-Z])([a-z])/g, ' $1$2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
@@ -142,8 +143,25 @@ function spaceSeparated(namingStyle, str) {
     } else if (namingStyle === 'kebab-case') {
         return str.replace(/-/g, ' ').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
     } else {
-        return str.replace(/[\\\-._/]/g, ' ').replace(/([A-Z])([a-z])/g, ' $1$2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+        if (isSpecialString(str)) {
+            return str
+        } else {
+            // 在大写+小写的字母前加空格、小写+大写之间加空间、标点符号前后加空格（多个标点视作一个整体，句号除外）、句号前后都是字母时在句号后加空格、数字（含小数负数）前后加空格、合并连续的空格
+            return str.replace(/([A-Z])([a-z])/g, ' $1$2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([^a-zA-Z0-9\s.]+)/g, ' $1 ').replace(/([a-zA-Z])\.([a-zA-Z])/g, '$1. $2').replace(/(-?\d*\.?\d+)/g, ' $1 ').replace(/\s+/g, ' ').trim();
+        }
     }
+}
+
+
+// 判断特殊字符串
+function isSpecialString(str) {
+    // 去除字符串头尾的所有标点符号
+    const str2 = str.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, '');
+    if (str2 === '') {
+        return true
+    }
+    // 判断字符串是否不包含字母
+    return /^[^a-zA-Z]*$/.test(str2);
 }
 
 
