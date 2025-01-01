@@ -39,7 +39,7 @@
       "type": "multiple",
       "values": ["1", "2", "3"],
       "valueLabels": ["默认", "蛇形", "驼峰"],
-      "description":"译文替换原文时生效。\n蛇形或驼峰替换仅支持英文。\n\nBug反馈：iibob@qq.com"
+      "description":"译文替换原文时生效。\n蛇形或驼峰替换仅支持英文。\n\nBug反馈：\niibobapp@gmail.com"
     }
   ]
 }
