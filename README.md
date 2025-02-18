@@ -17,7 +17,8 @@
 <br>
 
 ## 选项：
-![image](https://github.com/iibob/PopClipExtension/assets/10295975/408280aa-81bf-4195-9236-9fb97178d77d)
+![image](https://github.com/user-attachments/assets/86d1b51b-c9ff-46d3-b534-35f190ff82a8)
+
 - APP ID 和密钥请前往 [百度翻译开放平台](https://api.fanyi.baidu.com/doc/21) 获取。
 - 译文语言设置为 `自动检测` 时支持自动中英互译，设置为其他语言时不支持自动互译。
 - 译文显示方式设置为 `全都要` 时支持显示两个图标，分别对应“展示译文”和“替换原文”的功能。
